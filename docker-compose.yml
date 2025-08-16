@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: 'bitnami/postgresql:15'
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - "postgres_data:/bitnami/postgresql"
+    environment:
+      - POSTGRESQL_USERNAME=devuser
+      - POSTGRESQL_PASSWORD=example
+      - POSTGRESQL_DATABASE=devuser
+  excel-database-loader-api:
+    image: halversondm/excel-database-loader-api:latest
+    networks:
+      - app-tier
+    ports:
+      - "9100:8080"
+    depends_on:
+      - postgres
+networks:
+  app-tier:
+    driver: bridge
