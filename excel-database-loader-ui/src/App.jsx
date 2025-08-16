@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import MainContent from './MainContent';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -6,7 +6,7 @@ import Header from './Header';
 // Main App Component
 const App = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [activeView, setActiveView] = useState('dashboard');
+    const [activeView] = useState('dashboard');
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);

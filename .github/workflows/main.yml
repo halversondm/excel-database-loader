@@ -21,3 +21,10 @@ jobs:
           node-version: '22'
       - name: Build with Maven
         run: mvn -e --batch-mode clean install
+      - name: Build Docker images for all Dockerfiles
+        run: |
+          find . -name 'Dockerfile' | while read dockerfile; do
+            dir=$(dirname "$dockerfile")
+            imagename=$(basename "$dir")
+            docker build -t "spring-cloud-${imagename}:latest" "$dir"
+          done
