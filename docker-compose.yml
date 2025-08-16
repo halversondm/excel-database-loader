@@ -2,8 +2,10 @@ services:
   postgres:
     image: 'bitnami/postgresql:15'
     restart: always
+    networks:
+      - app-tier
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - "postgres_data:/bitnami/postgresql"
     environment:
@@ -16,8 +18,22 @@ services:
       - app-tier
     ports:
       - "9100:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/devuser
     depends_on:
       - postgres
+  excel-database-loader-ui:
+    image: halversondm/excel-database-loader-ui:latest
+    networks:
+      - app-tier
+    ports:
+      - "9200:8080"
+    depends_on:
+      - postgres
+      - excel-database-loader-api
 networks:
   app-tier:
     driver: bridge
+volumes:
+  postgres_data:
+    driver: local

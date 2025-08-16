@@ -23,7 +23,7 @@ jobs:
         run: mvn -e --batch-mode clean install
       - name: Build Docker images for all Dockerfiles
         run: |
-          find . -name 'Dockerfile' | while read dockerfile; do
+          find . -not -path "./excel-database-loader-ui/node_modules/*" -name 'Dockerfile' | while read dockerfile; do
             dir=$(dirname "$dockerfile")
             imagename=$(basename "$dir")
             docker build -t "${imagename}:latest" "$dir"
