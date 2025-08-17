@@ -1,25 +1,27 @@
 // Main Content Component
-import Dashboard from "./Dashboard";
-import Profile from "./Profile";
-import Settings from "./Settings";
-import Upload from "./Upload";
+import Dashboard from './Dashboard';
+import Profile from './Profile';
+import Settings from './Settings';
+import Upload from './Upload';
 
 const MainContent = ({ activeView }) => {
     const renderContent = () => {
-        switch(activeView) {
+        switch (activeView) {
             case 'dashboard':
-                return <Dashboard/>
+                return <Dashboard/>;
             case 'profile':
-                return <Profile/>
+                return <Profile/>;
             case 'settings':
-                return <Settings/>
+                return <Settings/>;
             case 'upload':
-                return <Upload/>
+                return <Upload/>;
             default:
                 return (
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-6">Welcome</h2>
-                        <p className="text-gray-600">Select an option from the sidebar to get started.</p>
+                        <p className="text-gray-600">
+                            Select an option from the sidebar to get started.
+                        </p>
                     </div>
                 );
         }

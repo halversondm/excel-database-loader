@@ -42,14 +42,17 @@ const Upload = () => {
             <div
                 className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-2xl flex flex-col items-center"
                 onDrop={handleDrop}
-                onDragOver={e => e.preventDefault()}
+                onDragOver={(e) => e.preventDefault()}
                 style={{cursor: 'pointer'}}
                 onClick={() => fileInputRef.current.click()}
             >
                 <div className="space-y-4 w-full text-center">
                     <div className="py-10 border-2 border-dashed border-blue-400 rounded-md">
-                        <p className="text-gray-700">Drag and drop an Excel file here, or click to select</p>
+                        <p className="text-gray-700">
+                            Drag and drop an Excel file here, or click to select
+                        </p>
                         <input
+                            id="fileInput"
                             type="file"
                             accept=".xlsx,.xls"
                             ref={fileInputRef}

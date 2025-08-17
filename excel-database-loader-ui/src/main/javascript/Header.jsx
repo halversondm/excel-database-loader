@@ -9,13 +9,16 @@ const Header = ({toggleSidebar, setActiveView}) => {
                     onClick={toggleSidebar}
                     className="p-2 rounded-md hover:bg-gray-100 lg:hidden"
                 >
-                    <Menu size={20} />
+                    <Menu size={20}/>
                 </button>
                 <h1 className="text-xl font-semibold text-gray-900">Homeowners</h1>
             </div>
             <div className="flex items-center space-x-4">
-                <button className="p-2 rounded-md hover:bg-gray-100" onClick={() => setActiveView('profile')}>
-                    <User size={20} />
+                <button
+                    className="p-2 rounded-md hover:bg-gray-100"
+                    onClick={() => setActiveView('profile')}
+                >
+                    <User size={20}/>
                 </button>
             </div>
         </header>

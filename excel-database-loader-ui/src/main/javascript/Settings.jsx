@@ -5,7 +5,9 @@ const Settings = () => {
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-2xl">
                 <div className="space-y-6">
                     <div>
-                        <h3 className="text-lg font-medium text-gray-900 mb-3">Preferences</h3>
+                        <h3 className="text-lg font-medium text-gray-900 mb-3">
+                            Preferences
+                        </h3>
                         <div className="space-y-3">
                             <label className="flex items-center">
                                 <input type="checkbox" className="mr-3"/>
@@ -28,7 +30,7 @@ const Settings = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Settings;

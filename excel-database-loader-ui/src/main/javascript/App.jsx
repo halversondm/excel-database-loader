@@ -33,10 +33,14 @@ const App = () => {
             <Header toggleSidebar={toggleSidebar} setActiveView={setActiveView}/>
 
             <div className="flex flex-1 overflow-hidden">
-                <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} setActiveView={setActiveView}/>
+                <Sidebar
+                    isOpen={sidebarOpen}
+                    closeSidebar={closeSidebar}
+                    setActiveView={setActiveView}
+                />
 
                 <div className="flex-1 flex flex-col lg:ml-0">
-                    <MainContent activeView={activeView} />
+                    <MainContent activeView={activeView}/>
                 </div>
             </div>
         </div>
