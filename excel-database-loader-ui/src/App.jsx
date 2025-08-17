@@ -6,7 +6,7 @@ import Header from './Header';
 // Main App Component
 const App = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [activeView] = useState('dashboard');
+    const [activeView, setActiveView] = useState('dashboard');
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -30,10 +30,10 @@ const App = () => {
 
     return (
         <div className="h-screen flex flex-col bg-gray-100">
-            <Header toggleSidebar={toggleSidebar} />
+            <Header toggleSidebar={toggleSidebar} setActiveView={setActiveView}/>
 
             <div className="flex flex-1 overflow-hidden">
-                <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} />
+                <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} setActiveView={setActiveView}/>
 
                 <div className="flex-1 flex flex-col lg:ml-0">
                     <MainContent activeView={activeView} />

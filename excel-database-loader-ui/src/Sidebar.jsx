@@ -1,10 +1,11 @@
-import { Home, User, Settings, X } from 'lucide-react';
+import {Home, Settings, Upload, User, X} from 'lucide-react';
 // Sidebar Component
-const Sidebar = ({ isOpen, closeSidebar }) => {
+const Sidebar = ({isOpen, closeSidebar, setActiveView}) => {
     const menuItems = [
         { icon: Home, label: 'Dashboard', id: 'dashboard' },
         { icon: User, label: 'Profile', id: 'profile' },
-        { icon: Settings, label: 'Settings', id: 'settings' }
+        {icon: Settings, label: 'Settings', id: 'settings'},
+        {icon: Upload, label: 'Upload', id: 'upload'}
     ];
 
     return (
@@ -38,6 +39,7 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
                         <button
                             key={item.id}
                             className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-800 transition-colors"
+                            onClick={() => setActiveView(item.id)}
                         >
                             <item.icon size={20} />
                             <span>{item.label}</span>

@@ -16,8 +16,6 @@ services:
     image: halversondm/excel-database-loader-api:latest
     networks:
       - app-tier
-    ports:
-      - "9100:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/devuser
     depends_on:

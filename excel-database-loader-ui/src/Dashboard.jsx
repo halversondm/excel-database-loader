@@ -10,7 +10,6 @@ const Dashboard = () => {
             setResults([]);
             return;
         }
-        // Replace `/api/search?query=${searchTerm}` with your API endpoint
         fetch(`/api/v1/excel/retrieve?search=${encodeURIComponent(searchTerm)}`)
             .then(res => res.json())
             .then(data => setResults(data))

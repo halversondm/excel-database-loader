@@ -6,8 +6,10 @@ import com.halversondm.excel_database_loader.service.HomeownerSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,11 +27,10 @@ public class ExcelParserController {
         this.homeownerSearch = homeownerSearch;
     }
 
-    @GetMapping("/api/v1/excel/parse")
-    public String parseExcel() {
+    @PostMapping("/api/v1/excel/parse")
+    public String parseExcel(@RequestParam("file") MultipartFile file) throws IOException {
         try {
-            String filePath = "/Users/halversondm/Documents/AmberFields/Homeowners Lists/Amber Fields HOL Aug 2025.xls"; // Change this to your file path
-            List<Homeowner> homeowners = excelNameAndAddressParser.parseExcelFile(filePath);
+            List<Homeowner> homeowners = excelNameAndAddressParser.parseExcelFile(file.getInputStream(), file.getResource().getFilename());
 
             log.info("Parsed {} homeowners from file", homeowners.size());
 

@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,42 +29,40 @@ public class ExcelNameAndAddressParser {
     /**
      * Parse Excel file and extract contact data
      */
-    public List<Homeowner> parseExcelFile(String filePath) throws IOException {
-        return parseExcelFile(filePath, 0); // Default to first sheet
+    public List<Homeowner> parseExcelFile(InputStream fis, String fileName) throws IOException {
+        return parseExcelFile(fis, fileName, 0); // Default to first sheet
     }
 
     /**
      * Parse specific sheet from Excel file
      */
-    public List<Homeowner> parseExcelFile(String filePath, int sheetIndex) throws IOException {
+    public List<Homeowner> parseExcelFile(InputStream fis, String fileName, int sheetIndex) throws IOException {
         List<Homeowner> contacts = new ArrayList<>();
 
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            Workbook workbook = createWorkbook(filePath, fis);
-            Sheet sheet = workbook.getSheetAt(sheetIndex);
+        Workbook workbook = createWorkbook(fileName, fis);
+        Sheet sheet = workbook.getSheetAt(sheetIndex);
 
-            // Auto-detect field mapping from header row
-            FieldMapping mapping = detectFieldMapping(sheet);
+        // Auto-detect field mapping from header row
+        FieldMapping mapping = detectFieldMapping(sheet);
 
-            // Parse data rows
-            Iterator<Row> rowIterator = sheet.iterator();
+        // Parse data rows
+        Iterator<Row> rowIterator = sheet.iterator();
 
-            // Skip header row
-            if (rowIterator.hasNext()) {
-                rowIterator.next();
-            }
-
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
-                Homeowner contact = parseContactFromRow(row, mapping);
-
-                if (contact != null && isValidContact(contact)) {
-                    contacts.add(contact);
-                }
-            }
-
-            workbook.close();
+        // Skip header row
+        if (rowIterator.hasNext()) {
+            rowIterator.next();
         }
+
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            Homeowner contact = parseContactFromRow(row, mapping);
+
+            if (contact != null && isValidContact(contact)) {
+                contacts.add(contact);
+            }
+        }
+
+        workbook.close();
 
         homeownerDao.saveAll(contacts);
 
@@ -73,7 +72,7 @@ public class ExcelNameAndAddressParser {
     /**
      * Create appropriate workbook based on file extension
      */
-    private Workbook createWorkbook(String filePath, FileInputStream fis) throws IOException {
+    private Workbook createWorkbook(String filePath, InputStream fis) throws IOException {
         if (filePath.toLowerCase().endsWith(".xlsx")) {
             return new XSSFWorkbook(fis);
         } else if (filePath.toLowerCase().endsWith(".xls")) {
