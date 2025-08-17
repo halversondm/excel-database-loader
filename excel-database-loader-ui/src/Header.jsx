@@ -1,4 +1,4 @@
-import { User,  Menu  } from 'lucide-react';
+import {Menu, User} from 'lucide-react';
 
 // Header Component
 const Header = ({ toggleSidebar }) => {
@@ -11,7 +11,7 @@ const Header = ({ toggleSidebar }) => {
                 >
                     <Menu size={20} />
                 </button>
-                <h1 className="text-xl font-semibold text-gray-900">My App</h1>
+                <h1 className="text-xl font-semibold text-gray-900">Homeowners</h1>
             </div>
             <div className="flex items-center space-x-4">
                 <button className="p-2 rounded-md hover:bg-gray-100">

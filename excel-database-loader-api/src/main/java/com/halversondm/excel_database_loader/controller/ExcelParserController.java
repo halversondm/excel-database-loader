@@ -2,8 +2,11 @@ package com.halversondm.excel_database_loader.controller;
 
 import com.halversondm.excel_database_loader.data.Homeowner;
 import com.halversondm.excel_database_loader.service.ExcelNameAndAddressParser;
+import com.halversondm.excel_database_loader.service.HomeownerSearch;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -15,8 +18,11 @@ public class ExcelParserController {
 
     private ExcelNameAndAddressParser excelNameAndAddressParser;
 
-    public ExcelParserController(ExcelNameAndAddressParser excelNameAndAddressParser) {
+    private HomeownerSearch homeownerSearch;
+
+    public ExcelParserController(ExcelNameAndAddressParser excelNameAndAddressParser, HomeownerSearch homeownerSearch) {
         this.excelNameAndAddressParser = excelNameAndAddressParser;
+        this.homeownerSearch = homeownerSearch;
     }
 
     @GetMapping("/api/v1/excel/parse")
@@ -37,5 +43,16 @@ public class ExcelParserController {
             log.error(e.toString());
         }
         return "Excel parsed successfully!";
+    }
+
+    @GetMapping("/api/v1/excel/retrieve")
+    public ResponseEntity<List<Homeowner>> retrieveHomeowner(@RequestParam("search") String searchString) {
+        List<Homeowner> homeowners = homeownerSearch.searchHomeowners(searchString);
+        log.info("Retrieved {} homeowners matching search string: {}", homeowners.size(), searchString);
+        if (homeowners.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(homeowners);
+        }
     }
 }

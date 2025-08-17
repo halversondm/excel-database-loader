@@ -1,9 +1,9 @@
 {
   "name": "excel-database-loader-ui",
   "version": "1.0.0",
-  "description": "A modern React.js application skeleton with responsive design and essential components",
+  "description": "Display homweowners from a an Excel database in a React application with Tailwind CSS.",
   "private": true,
-  "author": "Your Name <your.email@example.com>",
+  "author": "Dan Halverson <daniel.m.halverson@gmail.com",
   "license": "MIT",
   "keywords": [
     "react",
@@ -96,5 +96,6 @@
   },
   "bugs": {
     "url": "https://github.com/yourusername/react-app-skeleton/issues"
-  }
+  },
+  "proxy": "http://localhost:8082"
 }
