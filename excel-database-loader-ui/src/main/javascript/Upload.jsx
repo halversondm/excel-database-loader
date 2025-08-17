@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 
 const Upload = () => {
     const [uploadStatus, setUploadStatus] = useState('');
@@ -38,12 +38,14 @@ const Upload = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Excel Upload</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Excel Upload
+            </h2>
             <div
                 className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-2xl flex flex-col items-center"
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
-                style={{cursor: 'pointer'}}
+                style={{ cursor: 'pointer' }}
                 onClick={() => fileInputRef.current.click()}
             >
                 <div className="space-y-4 w-full text-center">
@@ -56,12 +58,14 @@ const Upload = () => {
                             type="file"
                             accept=".xlsx,.xls"
                             ref={fileInputRef}
-                            style={{display: 'none'}}
+                            style={{ display: 'none' }}
                             onChange={handleFileChange}
                         />
                     </div>
                     {uploadStatus && (
-                        <div className="mt-4 text-sm text-gray-600">{uploadStatus}</div>
+                        <div className="mt-4 text-sm text-gray-600">
+                            {uploadStatus}
+                        </div>
                     )}
                 </div>
             </div>

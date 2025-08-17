@@ -1,11 +1,13 @@
-import {Home, Settings, Upload, User, X} from 'lucide-react';
-// Sidebar Component
-const Sidebar = ({isOpen, closeSidebar, setActiveView}) => {
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Home, Settings, Upload, User, X } from 'lucide-react';
+
+const Sidebar = ({ isOpen, closeSidebar, setActiveView }) => {
     const menuItems = [
-        {icon: Home, label: 'Dashboard', id: 'dashboard'},
-        {icon: User, label: 'Profile', id: 'profile'},
-        {icon: Settings, label: 'Settings', id: 'settings'},
-        {icon: Upload, label: 'Upload', id: 'upload'},
+        { icon: Home, label: 'Dashboard', id: 'dashboard' },
+        { icon: User, label: 'Profile', id: 'profile' },
+        { icon: Settings, label: 'Settings', id: 'settings' },
+        { icon: Upload, label: 'Upload', id: 'upload' },
     ];
 
     return (
@@ -32,7 +34,7 @@ const Sidebar = ({isOpen, closeSidebar, setActiveView}) => {
                         onClick={closeSidebar}
                         className="p-1 rounded-md hover:bg-gray-800 lg:hidden"
                     >
-                        <X size={20}/>
+                        <X size={20} />
                     </button>
                 </div>
 
@@ -43,7 +45,7 @@ const Sidebar = ({isOpen, closeSidebar, setActiveView}) => {
                             className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-800 transition-colors"
                             onClick={() => setActiveView(item.id)}
                         >
-                            <item.icon size={20}/>
+                            <item.icon size={20} />
                             <span>{item.label}</span>
                         </button>
                     ))}
@@ -51,6 +53,12 @@ const Sidebar = ({isOpen, closeSidebar, setActiveView}) => {
             </aside>
         </>
     );
+};
+
+Sidebar.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    closeSidebar: PropTypes.func.isRequired,
+    setActiveView: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

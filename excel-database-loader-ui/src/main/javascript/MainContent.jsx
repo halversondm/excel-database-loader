@@ -1,4 +1,5 @@
-// Main Content Component
+import React from 'react';
+import PropTypes from 'prop-types';
 import Dashboard from './Dashboard';
 import Profile from './Profile';
 import Settings from './Settings';
@@ -8,17 +9,19 @@ const MainContent = ({ activeView }) => {
     const renderContent = () => {
         switch (activeView) {
             case 'dashboard':
-                return <Dashboard/>;
+                return <Dashboard />;
             case 'profile':
-                return <Profile/>;
+                return <Profile />;
             case 'settings':
-                return <Settings/>;
+                return <Settings />;
             case 'upload':
-                return <Upload/>;
+                return <Upload />;
             default:
                 return (
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Welcome</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                            Welcome
+                        </h2>
                         <p className="text-gray-600">
                             Select an option from the sidebar to get started.
                         </p>
@@ -32,6 +35,10 @@ const MainContent = ({ activeView }) => {
             {renderContent()}
         </main>
     );
+};
+
+MainContent.propTypes = {
+    activeView: PropTypes.string.isRequired,
 };
 
 export default MainContent;

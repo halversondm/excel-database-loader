@@ -1,11 +1,12 @@
-import {expect, vi} from 'vitest';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import React from 'react';
+import { expect, vi, beforeEach, afterEach, test } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Dashboard from '../../main/javascript/Dashboard';
 
 beforeEach(() => {
     // Reset fetch mock before each test
-    global.fetch = vi.fn();
+    vi.stubGlobal('fetch', vi.fn());
 });
 
 afterEach(() => {
@@ -13,7 +14,7 @@ afterEach(() => {
 });
 
 test('renders Dashboard and search input', () => {
-    render(<Dashboard/>);
+    render(<Dashboard />);
     expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
     expect(
         screen.getByPlaceholderText(/Enter your search term/i)
@@ -21,8 +22,8 @@ test('renders Dashboard and search input', () => {
 });
 
 test('does not fetch when searchTerm is empty', async () => {
-    render(<Dashboard/>);
-    expect(global.fetch).not.toHaveBeenCalled();
+    render(<Dashboard />);
+    expect(fetch).not.toHaveBeenCalled();
 });
 
 test('fetches and displays results on search', async () => {
@@ -40,16 +41,16 @@ test('fetches and displays results on search', async () => {
             secondName: 'B.',
         },
     ];
-    global.fetch.mockResolvedValueOnce({
+    fetch.mockResolvedValueOnce({
         json: async () => mockResults,
     });
 
-    render(<Dashboard/>);
+    render(<Dashboard />);
     const input = screen.getByPlaceholderText(/Enter your search term/i);
-    fireEvent.change(input, {target: {value: 'Smith'}});
+    fireEvent.change(input, { target: { value: 'Smith' } });
 
     await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledWith(
+        expect(fetch).toHaveBeenCalledWith(
             '/api/v1/excel/retrieve?search=Smith'
         );
         expect(screen.getByText('123 Main St')).toBeInTheDocument();
@@ -60,13 +61,13 @@ test('fetches and displays results on search', async () => {
 });
 
 test('shows no results if fetch fails', async () => {
-    global.fetch.mockRejectedValueOnce(new Error('API error'));
-    render(<Dashboard/>);
+    fetch.mockRejectedValueOnce(new Error('API error'));
+    render(<Dashboard />);
     const input = screen.getByPlaceholderText(/Enter your search term/i);
-    fireEvent.change(input, {target: {value: 'Error'}});
+    fireEvent.change(input, { target: { value: 'Error' } });
 
     await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
+        expect(fetch).toHaveBeenCalled();
         // No result cards should be rendered
         expect(screen.queryByText(/Last Name:/)).not.toBeInTheDocument();
     });

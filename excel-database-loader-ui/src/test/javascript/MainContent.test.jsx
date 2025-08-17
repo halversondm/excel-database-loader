@@ -1,5 +1,6 @@
-import {describe, expect, it} from 'vitest';
-import {render, screen} from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import MainContent from '../../main/javascript/MainContent';
 import '@testing-library/jest-dom';
 
@@ -20,27 +21,27 @@ vi.mock('../../main/javascript/Upload', () => ({
 
 describe('MainContent', () => {
     it('renders Dashboard when activeView is "dashboard"', () => {
-        render(<MainContent activeView="dashboard"/>);
+        render(<MainContent activeView="dashboard" />);
         expect(screen.getByTestId('dashboard')).toBeInTheDocument();
     });
 
     it('renders Profile when activeView is "profile"', () => {
-        render(<MainContent activeView="profile"/>);
+        render(<MainContent activeView="profile" />);
         expect(screen.getByTestId('profile')).toBeInTheDocument();
     });
 
     it('renders Settings when activeView is "settings"', () => {
-        render(<MainContent activeView="settings"/>);
+        render(<MainContent activeView="settings" />);
         expect(screen.getByTestId('settings')).toBeInTheDocument();
     });
 
     it('renders Upload when activeView is "upload"', () => {
-        render(<MainContent activeView="upload"/>);
+        render(<MainContent activeView="upload" />);
         expect(screen.getByTestId('upload')).toBeInTheDocument();
     });
 
     it('renders welcome message for unknown activeView', () => {
-        render(<MainContent activeView="unknown"/>);
+        render(<MainContent activeView="unknown" />);
         expect(screen.getByText(/Welcome/i)).toBeInTheDocument();
         expect(
             screen.getByText(/Select an option from the sidebar/i)
@@ -48,7 +49,7 @@ describe('MainContent', () => {
     });
 
     it('renders welcome message when activeView is undefined', () => {
-        render(<MainContent/>);
+        render(<MainContent />);
         expect(screen.getByText(/Welcome/i)).toBeInTheDocument();
     });
 });

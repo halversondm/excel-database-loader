@@ -1,5 +1,6 @@
-import {describe, expect, it, vi} from 'vitest';
-import {fireEvent, render, screen} from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Sidebar from '../../main/javascript/Sidebar';
 import '@testing-library/jest-dom';
 

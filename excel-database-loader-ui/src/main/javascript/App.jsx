@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import MainContent from './MainContent';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -30,7 +30,10 @@ const App = () => {
 
     return (
         <div className="h-screen flex flex-col bg-gray-100">
-            <Header toggleSidebar={toggleSidebar} setActiveView={setActiveView}/>
+            <Header
+                toggleSidebar={toggleSidebar}
+                setActiveView={setActiveView}
+            />
 
             <div className="flex flex-1 overflow-hidden">
                 <Sidebar
@@ -40,7 +43,7 @@ const App = () => {
                 />
 
                 <div className="flex-1 flex flex-col lg:ml-0">
-                    <MainContent activeView={activeView}/>
+                    <MainContent activeView={activeView} />
                 </div>
             </div>
         </div>

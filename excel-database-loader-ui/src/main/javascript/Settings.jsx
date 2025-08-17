@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Settings = () => {
     return (
         <div>
@@ -10,21 +12,22 @@ const Settings = () => {
                         </h3>
                         <div className="space-y-3">
                             <label className="flex items-center">
-                                <input type="checkbox" className="mr-3"/>
-                                <span className="text-gray-700">Enable notifications</span>
+                                <input type="checkbox" className="mr-3" />
+                                <span className="text-gray-700">
+                                    Enable notifications
+                                </span>
                             </label>
                             <label className="flex items-center">
-                                <input type="checkbox" className="mr-3"/>
+                                <input type="checkbox" className="mr-3" />
                                 <span className="text-gray-700">Dark mode</span>
                             </label>
                             <label className="flex items-center">
-                                <input type="checkbox" className="mr-3"/>
+                                <input type="checkbox" className="mr-3" />
                                 <span className="text-gray-700">Auto-save</span>
                             </label>
                         </div>
                     </div>
-                    <button
-                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">
+                    <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">
                         Update Settings
                     </button>
                 </div>

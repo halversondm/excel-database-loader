@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Dashboard = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -43,9 +43,15 @@ const Dashboard = () => {
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">
                             {item.address}
                         </h3>
-                        <p className="text-gray-600">Last Name: {item.lastName}</p>
-                        <p className="text-gray-600">First Name: {item.firstName}</p>
-                        <p className="text-gray-600">Second Name: {item.secondName}</p>
+                        <p className="text-gray-600">
+                            Last Name: {item.lastName}
+                        </p>
+                        <p className="text-gray-600">
+                            First Name: {item.firstName}
+                        </p>
+                        <p className="text-gray-600">
+                            Second Name: {item.secondName}
+                        </p>
                     </div>
                 ))}
             </div>
