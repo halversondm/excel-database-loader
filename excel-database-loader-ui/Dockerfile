@@ -4,7 +4,7 @@ FROM nginx:1.25-alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy built React app from build stage
-COPY build /usr/share/nginx/html
+COPY target/classes/static /usr/share/nginx/html
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
