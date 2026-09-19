@@ -1,4 +1,4 @@
-FROM nginx:1.25-alpine
+FROM nginx:1.30.5-alpine
 
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
