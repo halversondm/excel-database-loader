@@ -7,9 +7,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Setup Java JDK
         uses: actions/setup-java@v6
         with:
@@ -21,6 +25,22 @@ jobs:
           node-version: '22'
       - name: Build with Maven
         run: mvn -e --batch-mode clean install
+      - name: Cache SonarCloud packages
+        if: env.SONAR_TOKEN != ''
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Analyze with SonarCloud
+        if: env.SONAR_TOKEN != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          mvn -e --batch-mode org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar
+          -Dsonar.projectKey=halversondm_excel-database-loader
+          -Dsonar.organization=halversondm
+          -Dsonar.host.url=https://sonarcloud.io
       - name: Build Docker images for all Dockerfiles
         run: |
           find . -not -path "./excel-database-loader-ui/node_modules/*" -name 'Dockerfile' | while read dockerfile; do
